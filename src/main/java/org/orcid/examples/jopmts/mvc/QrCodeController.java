@@ -38,19 +38,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class QrCodeController {
-    
 
-    @RequestMapping(value = "/qrcode/john_doe.png", method=RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
-    public @ResponseBody byte[] generateJohnDoe() {
-        VCard johnDoe = new VCard("John Doe").setEmail("john.doe@example.org").setAddress("John Doe Street 1, 5678 Doestown").setTitle("Mister")
-                .setCompany("John Doe Inc.").setPhonenumber("1234").setWebsite("www.example.org");
-        return QRCode.from(johnDoe).stream().toByteArray();
+    @RequestMapping(value = "/qrcode/generate.png", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+    public @ResponseBody
+    byte[] generate(@RequestParam("website") String website, @RequestParam("name") String name, @RequestParam("email") String email) {
+        VCard vCard = new VCard(name).setEmail(email).setWebsite(website);
+        return QRCode.from(vCard).withSize(500, 500).stream().toByteArray();
     }
-    
-    @RequestMapping(value = "/qrcode/generate.png", method=RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
-    public @ResponseBody byte[] generate(@RequestParam("website") String website, @RequestParam("name") String name, @RequestParam("email") String email) {
-        VCard johnDoe = new VCard(name).setEmail(email).setWebsite(website);
-        return QRCode.from(johnDoe).withSize(500, 500).stream().toByteArray();
-    }
-    
+
 }
