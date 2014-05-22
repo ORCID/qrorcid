@@ -43,6 +43,7 @@
             <li><a href="<c:url value="/index.jsp"/>">Home</a></li>
             <li><a href="<c:url value="/login.jsp"/>" class="selected">Login</a></li>
             <li><a href="<c:url value="/orcid/info"/>">ORCID info</a></li>
+            <li><a href="<c:url value="/orcid/qrcode"/>">QR code</a></li>
         </ul>
 
         <div id="content">

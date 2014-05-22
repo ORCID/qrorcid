@@ -44,12 +44,13 @@ public class OrcidProfile extends OrcidClientModel {
     private static final Map<String, String> modelStringArrayPaths;
     static {
         Map<String, String> map1 = new HashMap<String, String>();
-        map1.put("orcid", "//o:orcid-profile/o:orcid");
+        map1.put("orcid", "//o:orcid-profile/o:orcid-identifier/o:path");
+        map1.put("orcid_uri", "//o:orcid-profile/o:orcid-identifier/o:uri");
         map1.put("full_name", "//o:personal-details/o:credit-name");
         map1.put("given_names", "//o:personal-details/o:given-names");
         map1.put("family_name", "//o:personal-details/o:family-name");
         map1.put("vocative_name", "//o:personal-details/o:vocative-name");
-        map1.put("email", "//o:contact-details/o:email");
+        map1.put("email", "//o:contact-details/o:email[@primary='true']");
         map1.put("institution_name", "//o:primary-institution/o:primary-institution-name");
 
         modelStringPaths = Collections.unmodifiableMap(map1);

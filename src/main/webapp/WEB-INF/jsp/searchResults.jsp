@@ -40,6 +40,7 @@
         <li><a href="<c:url value="/login.jsp"/>">Login</a></li>
       </authz:authorize>
       <li><a href="<c:url value="/orcid/info"/>" class="selected">ORCID info</a></li>
+      <li><a href="<c:url value="/orcid/qrcode"/>">QR code</a></li>
     </ul>
 
   <div id="content">

@@ -40,6 +40,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.commons.lang.StringUtils;
 import org.orcid.examples.jopmts.OrcidService;
 import org.orcid.examples.jopmts.impl.NamespaceContextImpl;
 import org.springframework.stereotype.Controller;
@@ -85,6 +86,25 @@ public class OrcidController {
         model.mergeAttributes(new OrcidSearchResults(orcidDocument, xpath));
 
         return "searchResults";
+    }
+    
+    @RequestMapping("/orcid/qrcode")
+    public String orcidQrCode(Model model) throws Exception {
+        Document orcidDocument = tier2Service.getOrcidDocument();
+        model.addAttribute("full_orcid_profile", documentXml(orcidDocument));
+
+        XPath xpath = createXPath();
+        OrcidProfile orcidProfile = new OrcidProfile(orcidDocument, xpath);
+        model.mergeAttributes(orcidProfile);
+        
+        String vcardName = (String) orcidProfile.get("given_names");
+        String familyName = (String) orcidProfile.get("family_name");
+        if(StringUtils.isNotBlank(familyName)){
+            vcardName += " " + familyName;
+        }
+        model.addAttribute("vcard_name", vcardName);
+
+        return "qrcode";
     }
 
     private String documentXml(Document orcidDocument) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
