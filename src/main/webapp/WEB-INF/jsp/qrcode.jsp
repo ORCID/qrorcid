@@ -20,14 +20,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
     <!-- Custom styles for this template -->
-    <link href="//getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="//getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <link href="css/jumbotron-narrow.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -48,8 +42,8 @@
         <h3 class="text-muted">Qrorcid</h3>
       </div>
 
-<div class="container">
-<div class="row">
+      <div class="container">
+          <div class="row">
             <h1>Your QR code</h1>
             <spring:url var="qrcode_url" value="{base_url}qrcode/generate.png?name={name}&email={email}&website={website}">
                 <spring:param name="base_url">
@@ -87,7 +81,7 @@
 	            <a href="<c:out value="${zazzle_stickers_url}"/>">ORCID Stickers</a>
             </p>
         </div>
-</div>
+      </div>
 
       <div class="footer">
         <p>&copy; ORCID Inc 2014</p>
@@ -99,5 +93,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   </body>
 </html>
