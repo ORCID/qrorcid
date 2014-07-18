@@ -70,7 +70,7 @@
         <div class="row">
             <h1>Your Zazzle Products</h1>
             <p>
-	            <spring:url var="zazzle_mug_url" value="http://www.zazzle.com/api/create/at-238329472821236199?rf=238329472821236199&ax=Linkover&pd=168331560131091417&fwd=DesignTool&tc=&ic=&t_image0_iid=http%3A%2F%2F{base_url}qrcode/generate.png?name={name}%26email={email}%26website={website}">
+	            <spring:url var="zazzle_stickers_url" value="http://www.zazzle.com/api/create/at-238329472821236199?rf=238329472821236199&ax=Linkover&pd=217289818554457211&fwd=DesignTool&tc=&ic=&t_qrcode_iid=http%3A%2F%2F{base_url}qrcode/generate.png?name={name}%26email={email}%26website={website}&t_orcid_txt=%20{website}">
 	                <spring:param name="base_url">
 	                    <c:out value="${pageContext.request.serverName}"/>:<c:out value="${pageContext.request.serverPort}"/><spring:url value="/"/>
 		            </spring:param>
@@ -84,7 +84,7 @@
 	                    <c:out value="${orcid_uri}"/>
 	                </spring:param>
 	            </spring:url>
-	            <a href="<c:out value="${zazzle_mug_url}"/>">ORCID Mug</a>
+	            <a href="<c:out value="${zazzle_stickers_url}"/>">ORCID Stickers</a>
             </p>
         </div>
 </div>
