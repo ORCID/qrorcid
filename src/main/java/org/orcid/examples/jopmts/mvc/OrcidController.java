@@ -24,9 +24,6 @@
 package org.orcid.examples.jopmts.mvc;
 
 import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.transform.OutputKeys;
@@ -46,7 +43,6 @@ import org.orcid.examples.jopmts.impl.NamespaceContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.w3c.dom.Document;
 
 /**
@@ -54,41 +50,18 @@ import org.w3c.dom.Document;
  */
 @Controller
 public class OrcidController {
-    private OrcidService tier1Service;
     private OrcidService tier2Service;
 
     public void setOrcidService(OrcidService orcidService) {
         this.tier2Service = orcidService;
     }
 
-    public void setOrcidServicePublic(OrcidService orcidService) {
-        this.tier1Service = orcidService;
+    @RequestMapping("/")
+    public String home() {
+        return "home";
     }
 
-    @RequestMapping("/orcid/info")
-    public String orcidInfo(Model model) throws Exception {
-        Document orcidDocument = tier2Service.getOrcidDocument();
-        model.addAttribute("full_orcid_profile", documentXml(orcidDocument));
-
-        XPath xpath = createXPath();
-        model.mergeAttributes(new OrcidProfile(orcidDocument, xpath));
-
-        return "orcid";
-    }
-
-    @RequestMapping("/orcid/search")
-    public String orcidSearch(@RequestParam("text") String text, Model model) throws Exception {
-        Map<String, String> searchTerms = new HashMap<String, String>();
-        searchTerms.put("text", text);
-        Document orcidDocument = tier1Service.searchOrcid(searchTerms);
-
-        XPath xpath = createXPath();
-        model.mergeAttributes(new OrcidSearchResults(orcidDocument, xpath));
-
-        return "searchResults";
-    }
-    
-    @RequestMapping("/orcid/qrcode")
+    @RequestMapping("/qrcode")
     public String orcidQrCode(Model model) throws Exception {
         Document orcidDocument = tier2Service.getOrcidDocument();
         model.addAttribute("full_orcid_profile", documentXml(orcidDocument));
@@ -96,10 +69,10 @@ public class OrcidController {
         XPath xpath = createXPath();
         OrcidProfile orcidProfile = new OrcidProfile(orcidDocument, xpath);
         model.mergeAttributes(orcidProfile);
-        
+
         String vcardName = (String) orcidProfile.get("given_names");
         String familyName = (String) orcidProfile.get("family_name");
-        if(StringUtils.isNotBlank(familyName)){
+        if (StringUtils.isNotBlank(familyName)) {
             vcardName += " " + familyName;
         }
         model.addAttribute("vcard_name", vcardName);
@@ -119,56 +92,6 @@ public class OrcidController {
         trans.transform(source, result);
         String xmlString = sw.toString();
         return xmlString;
-    }
-
-    @RequestMapping("/orcid/work")
-    public String workInfo(@RequestParam("workNum") int workNum, Model model) throws Exception {
-        Document orcidDocument = tier2Service.getOrcidDocument();
-        XPath xpath = createXPath();
-        List<Model> pubs = OrcidProfile.parsePublications(xpath, orcidDocument);
-        model.mergeAttributes(pubs.get(workNum).asMap());
-        return "work";
-    }
-
-    @RequestMapping("/orcid/author")
-    public String authorInfo(@RequestParam("workNum") int workNum, @RequestParam("authorNum") int authorNum, Model model) throws Exception {
-        Document orcidDocument = tier2Service.getOrcidDocument();
-        XPath xpath = createXPath();
-        List<Model> pubs = OrcidProfile.parsePublications(xpath, orcidDocument);
-        List<Model> authors = (List<Model>) pubs.get(workNum).asMap().get("authors");
-        model.mergeAttributes(authors.get(authorNum).asMap());
-        return "author";
-    }
-
-    @RequestMapping("/orcid/record")
-    public String orcidRecord(@RequestParam("orcid") String orcid, Model model) throws Exception {
-        Document orcidDocument = tier1Service.getOrcidDocument(orcid);
-        model.addAttribute("full_orcid_profile", documentXml(orcidDocument));
-
-        XPath xpath = createXPath();
-        model.mergeAttributes(new OrcidProfile(orcidDocument, xpath));
-
-        return "record";
-    }
-
-    @RequestMapping("/orcid/record/work")
-    public String workForOrcid(@RequestParam("orcid") String orcid, @RequestParam("workNum") int workNum, Model model) throws Exception {
-        Document orcidDocument = tier1Service.getOrcidDocument(orcid);
-        XPath xpath = createXPath();
-        List<Model> pubs = OrcidProfile.parsePublications(xpath, orcidDocument);
-        model.mergeAttributes(pubs.get(workNum).asMap());
-        return "work";
-    }
-
-    @RequestMapping("/orcid/record/author")
-    public String authorForOrcid(@RequestParam("orcid") String orcid, @RequestParam("workNum") int workNum, @RequestParam("authorNum") int authorNum, Model model)
-            throws Exception {
-        Document orcidDocument = tier1Service.getOrcidDocument(orcid);
-        XPath xpath = createXPath();
-        List<Model> pubs = OrcidProfile.parsePublications(xpath, orcidDocument);
-        List<Model> authors = (List<Model>) pubs.get(workNum).asMap().get("authors");
-        model.mergeAttributes(authors.get(authorNum).asMap());
-        return "author";
     }
 
     private XPath createXPath() {

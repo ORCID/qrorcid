@@ -36,17 +36,12 @@
     <context:component-scan base-package="org.orcid"/>
     <mvc:annotation-driven/>
     
-    <http access-denied-page="/login.jsp"
+    <http
         xmlns="http://www.springframework.org/schema/security"
     >
-        <intercept-url pattern="/orcid-api/**" access="ROLE_USER" />
         <intercept-url pattern="/**"
             access="IS_AUTHENTICATED_ANONYMOUSLY" />
-
-        <form-login authentication-failure-url="/login.jsp"
-            default-target-url="/index.jsp" login-page="/login.jsp"
-            login-processing-url="/login.do" />
-        <logout logout-success-url="/index.jsp" logout-url="/logout.do" />
+        <http-basic/>
         <anonymous />
         <custom-filter ref="oauth2ClientFilter" after="EXCEPTION_TRANSLATION_FILTER" />
     </http>
@@ -56,8 +51,7 @@
     >
         <authentication-provider>
             <user-service>
-                <user name="josiah" password="carberry"
-                    authorities="ROLE_USER" />
+                <user name="josiah" password="carberry" authorities="ROLE_USER" />
                 <user name="truman" password="grayson" authorities="ROLE_USER" />
             </user-service>
         </authentication-provider>
@@ -109,7 +103,6 @@
 
     <bean id="orcidController" class="org.orcid.examples.jopmts.mvc.OrcidController">
         <property name="orcidService" ref="orcidService" />
-        <property name="orcidServicePublic" ref="orcidServicePublic" />
     </bean>
 
     <bean id="orcidService" class="org.orcid.examples.jopmts.impl.OrcidServiceImpl">
@@ -121,6 +114,9 @@
                     <list>
                         <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
                     </list>
+                </property>
+                <property name="accessTokenProvider">
+                    <bean class="org.orcid.examples.jopmts.oauth.OrcidAccessTokenProviderChain" />
                 </property>
             </oauth:rest-template>
         </property>

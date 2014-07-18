@@ -41,53 +41,35 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li><a href="<c:url value="/"/>">Home</a></li>
+          <li class="active"><a href="#">Home</a></li>
           <li><a href="https://github.com/wjrsimpson/qrorcid/">About</a></li>
           <li><a href="https://github.com/wjrsimpson/qrorcid/issues">Contact</a></li>
         </ul>
         <h3 class="text-muted">Qrorcid</h3>
       </div>
 
-<div class="container">
-<div class="row">
-            <h1>Your QR code</h1>
-            <spring:url var="qrcode_url" value="{base_url}qrcode/generate.png?name={name}&email={email}&website={website}">
-                <spring:param name="base_url">
-	                    http://<c:out value="${pageContext.request.serverName}"/>:<c:out value="${pageContext.request.serverPort}"/><spring:url value="/"/>
-	            </spring:param>
-                <spring:param name="name" >
-                    <c:out value="${vcard_name}"/>
-                </spring:param>
-                <spring:param name="email" >
-                    <c:out value="${email}"/>
-                </spring:param>
-                <spring:param name="website" >
-                    <c:out value="${orcid_uri}"/>
-                </spring:param>
-            </spring:url>
-            <img src="<c:out value="${qrcode_url}"/>"/>
+      <div class="jumbotron">
+        <h1>Welcome to Qrorcid!</h1>
+        <p class="lead">Qrorcid enables you to create a QR code from details on your ORCID record.</p>
+        <p><a class="btn btn-lg btn-success" href="<c:url value="/qrcode"/>" role="button">Create your QR code</a></p>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-6">
+          <h4>About ORCID</h4>
+          <p>
+              <a href="http://orcid.org" target="_blank">ORCID</a> provides a persistent digital identifier that distinguishes you from every other researcher and,
+              through integration in key research workflows such as manuscript and grant submission, supports automated
+              linkages between you and your professional activities ensuring that your work is recognized.
+              <a href="http://orcid.org/about/what-is-orcid" target="_blank">Find out more.</a>
+          </p>
         </div>
-        <div class="row">
-            <h1>Your Zazzle Products</h1>
-            <p>
-	            <spring:url var="zazzle_mug_url" value="http://www.zazzle.com/api/create/at-238329472821236199?rf=238329472821236199&ax=Linkover&pd=168331560131091417&fwd=DesignTool&tc=&ic=&t_image0_iid=http%3A%2F%2F{base_url}qrcode/generate.png?name={name}%26email={email}%26website={website}">
-	                <spring:param name="base_url">
-	                    <c:out value="${pageContext.request.serverName}"/>:<c:out value="${pageContext.request.serverPort}"/><spring:url value="/"/>
-		            </spring:param>
-	                <spring:param name="name" >
-	                    <c:out value="${vcard_name}"/>
-	                </spring:param>
-	                <spring:param name="email" >
-	                    <c:out value="${email}"/>
-	                </spring:param>
-	                <spring:param name="website" >
-	                    <c:out value="${orcid_uri}"/>
-	                </spring:param>
-	            </spring:url>
-	            <a href="<c:out value="${zazzle_mug_url}"/>">ORCID Mug</a>
-            </p>
+
+        <div class="col-lg-6">
+          <h4>About Zazzle</h4>
+          <p>Zazzle is an online platform that allow us to create customized ORCID products for you to buy. Create your QR code now to see what you can buy!</p>
         </div>
-</div>
+      </div>
 
       <div class="footer">
         <p>&copy; ORCID Inc 2014</p>
