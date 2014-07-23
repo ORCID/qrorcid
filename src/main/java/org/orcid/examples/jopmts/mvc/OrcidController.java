@@ -37,7 +37,10 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.node.ObjectNode;
 import org.orcid.examples.jopmts.OrcidService;
 import org.orcid.examples.jopmts.impl.NamespaceContextImpl;
 import org.springframework.stereotype.Controller;
@@ -75,7 +78,15 @@ public class OrcidController {
         if (StringUtils.isNotBlank(familyName)) {
             vcardName += " " + familyName;
         }
-        model.addAttribute("vcard_name", vcardName);
+
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode rootNode = mapper.createObjectNode();
+        rootNode.put("name", vcardName);
+        rootNode.put("email", (String) orcidProfile.get("email"));
+        rootNode.put("website", (String) orcidProfile.get("orcid_uri"));
+        String jsonString = mapper.writeValueAsString(rootNode);
+        String base64ParamsJson = Base64.encodeBase64URLSafeString(jsonString.getBytes("UTF-8"));
+        model.addAttribute("base64ParamsJson", base64ParamsJson);
 
         return "qrcode";
     }

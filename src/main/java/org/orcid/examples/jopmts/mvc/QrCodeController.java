@@ -23,11 +23,18 @@
  */
 package org.orcid.examples.jopmts.mvc;
 
+import java.io.IOException;
+
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.vcard.VCard;
 
+import org.apache.commons.codec.binary.Base64;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,4 +53,17 @@ public class QrCodeController {
         return QRCode.from(vCard).withSize(500, 500).stream().toByteArray();
     }
 
+    @RequestMapping(value = "/qrcode/{params}/generate.png", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+    public @ResponseBody
+    byte[] generateFromBase64(@PathVariable("params") String base64ParamsJson) throws JsonProcessingException, IOException {
+        String jsonString = new String(Base64.decodeBase64(base64ParamsJson), "UTF-8");
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode rootNode = mapper.readTree(jsonString);
+        String name = rootNode.path("name").asText();
+        String email = rootNode.path("email").asText();
+        String website = rootNode.path("website").asText();
+        VCard vCard = new VCard(name).setEmail(email).setWebsite(website);
+        return QRCode.from(vCard).withSize(500, 500).stream().toByteArray();
+    }
+    
 }
