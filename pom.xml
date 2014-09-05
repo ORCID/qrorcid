@@ -26,13 +26,15 @@
 		<relativePath>../../..</relativePath>
 	</parent>
 
-    <artifactId>jopmts</artifactId>
+    <groupId>org.orcid</groupId>
+    <artifactId>qrorcid</artifactId>
+    <version>1.0.0</version>
     <packaging>war</packaging>
-    <name>OAuth for ORCID - Journal of Psychocermanics Manuscript Tracking System (OAuth 2 Client Example)</name>
+    <name>Qrorcid</name>
 
     <properties>
-        <m2eclipse.wtp.contextRoot>jopmts</m2eclipse.wtp.contextRoot>
-    </properties> 
+        <m2eclipse.wtp.contextRoot>qrorcid</m2eclipse.wtp.contextRoot>
+    </properties>
 
 	<profiles>
 		<profile>
@@ -160,9 +162,9 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>org.springframework.security.oauth</groupId>
 			<artifactId>spring-security-oauth2</artifactId>
-			<version>${project.version}</version>
+			<version>1.0.5.RELEASE</version>
 		</dependency>
 
 		<dependency>
