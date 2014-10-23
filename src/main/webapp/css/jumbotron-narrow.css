@@ -87,4 +87,10 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+  
+/* Custom stuff for qrorcid */
+  .product-link {
+    font-size: 1.4em;
+  }
+  
 }
