@@ -46,6 +46,8 @@ public class OrcidProfile extends OrcidClientModel {
         Map<String, String> map1 = new HashMap<String, String>();
         map1.put("orcid", "//o:orcid-profile/o:orcid-identifier/o:path");
         map1.put("orcid_uri", "//o:orcid-profile/o:orcid-identifier/o:uri");
+        map1.put("orcid_host", "//o:orcid-profile/o:orcid-identifier/o:host");
+        map1.put("orcid_path", "//o:orcid-profile/o:orcid-identifier/o:path");
         map1.put("full_name", "//o:personal-details/o:credit-name");
         map1.put("given_names", "//o:personal-details/o:given-names");
         map1.put("family_name", "//o:personal-details/o:family-name");

@@ -58,7 +58,7 @@
             <div class="row">
                 <h1>Your Zazzle Products</h1>
                 <p>
-	                <spring:url var="zazzle_stickers_url" value="http://www.zazzle.com/api/create/at-238329472821236199?rf=238329472821236199&ax=Linkover&pd=217325965469569268&fwd=DesignTool&tc=&ic=&t_qrcode_iid=http%3A%2F%2F{base_url}qrcode/{base64ParamsJson}/generate.png&t_orcid_txt=%20{website}">
+	                <spring:url var="zazzle_stickers_url" value="http://www.zazzle.com/api/create/at-238329472821236199?rf=238329472821236199&ax=Linkover&pd=217622793802894344&fwd=DesignTool&tc=&ic=&t_qrcode_iid=http%3A%2F%2F{base_url}qrcode/{base64ParamsJson}/generate.png&t_orcid_txt={website}">
 	                    <spring:param name="base_url">
 	                        <c:out value="${pageContext.request.serverName}"/>:<c:out value="${pageContext.request.serverPort}"/><spring:url value="/"/>
 		                </spring:param>
@@ -69,13 +69,13 @@
 	                        <c:out value="${email}"/>
 	                    </spring:param>
 	                    <spring:param name="website" >
-	                        <c:out value="${orcid_uri}"/>
+	                        <c:out value="${orcid_host}/${orcid_path}"/>
 	                    </spring:param>
 	                    <spring:param name="base64ParamsJson" >
                             <c:out value="${base64ParamsJson}"/>
                         </spring:param>
 	                </spring:url>
-	                <a href="<c:out value="${zazzle_stickers_url}"/>">ORCID Stickers</a>
+	                <a class="product-link" href="<c:out value="${zazzle_stickers_url}"/>">ORCID Stickers</a>
                 </p>
             </div>
         </div>
