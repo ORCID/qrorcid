@@ -58,7 +58,7 @@
             <div class="row">
                 <h1>Your Zazzle Products</h1>
                 <p>
-	                <spring:url var="zazzle_stickers_url" value="http://www.zazzle.com/api/create/at-238329472821236199?rf=238329472821236199&ax=Linkover&pd=217593465776537034fwd=DesignTool&tc=&ic=&t_qrcode_iid=http%3A%2F%2F{base_url}qrcode/{base64ParamsJson}/generate.png&t_orcid_txt=%20{website}">
+	                <spring:url var="zazzle_stickers_url" value="http://www.zazzle.com/api/create/at-238329472821236199?rf=238329472821236199&ax=Linkover&pd=217593465776537034&fwd=DesignTool&tc=&ic=&t_qrcode_iid=http%3A%2F%2F{base_url}qrcode/{base64ParamsJson}/generate.png&t_orcid_txt=%20{website}">
 	                    <spring:param name="base_url">
 	                        <c:out value="${pageContext.request.serverName}"/>:<c:out value="${pageContext.request.serverPort}"/><spring:url value="/"/>
 		                </spring:param>
