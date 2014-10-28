@@ -92,7 +92,17 @@
     >
         <property name="order" value="0" />
     </bean>
-
+    
+    <bean id="simpleMappingExceptionResolver"
+          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <map>
+                <entry key="org.springframework.security.oauth2.common.exceptions.InvalidRequestException" value="home"/>
+            </map>
+        </property>
+        <property name="warnLogCategory" value="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"/>
+    </bean>
+    
     <!--Basic application beans. -->
     <bean id="viewResolver"
         class="org.springframework.web.servlet.view.InternalResourceViewResolver"
