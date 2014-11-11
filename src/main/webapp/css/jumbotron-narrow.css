@@ -93,4 +93,9 @@ body {
     font-size: 1.4em;
   }
   
+  .qrcode-image {
+    width: 150px;
+    height: 150px;
+  }
+  
 }
