@@ -43,8 +43,9 @@
             </div>
 
             <div class="container">
-                <div class="row">
-                    <p>
+	            <div class="row">
+	                <h2>Get items with your QR code</h2>
+	                <p>
                         <label for="country-select">Choose country</label>
                         <select id="country-select">
                             <option value="com.au">Australia</option>
@@ -70,9 +71,6 @@
                             <option value="com" selected>USA (English)</option>
                         </select>
                     </p>
-                </div>
-	            <div class="row">
-	                <h1>Get items with your QR code</h1>
 	                <p>
 		                <spring:url var="zazzle_stickers_url" value="http://www.zazzle.com/api/create/at-238329472821236199?rf=238329472821236199&ax=Linkover&pd=217218133325449262&fwd=DesignTool&tc=&ic=&t_qrcode_iid=http%3A%2F%2F{base_url}qrcode/{base64ParamsJson}/generate.png&t_orcid_txt={website}">
 		                    <spring:param name="base_url">
@@ -97,7 +95,7 @@
 	                </p>
 	            </div>
 		        <div class="row">
-	                <h1>Your QR code</h1>
+	                <h2>Click to download your QR code</h2>
 	                <spring:url var="qrcode_url" value="{base_url}qrcode/{base64ParamsJson}/generate.png">
 	                    <spring:param name="base_url">
 	                        http://<c:out value="${pageContext.request.serverName}"/>:<c:out value="${pageContext.request.serverPort}"/><spring:url value="/"/>
@@ -106,7 +104,7 @@
 	                        <c:out value="${base64ParamsJson}"/>
 	                    </spring:param>
 	                </spring:url>
-	                <div><a href="<c:out value="${qrcode_url}"/>" download="my_orcid_qrcode.png"><img class="qrcode-image" src="<c:out value="${qrcode_url}"/>"></img></a></div>
+	                <div><a href="<c:out value="${qrcode_url}"/>" download="my_orcid_qrcode.png" type="image/png"><img class="qrcode-image" src="<c:out value="${qrcode_url}"/>"></img></a></div>
 	            </div>
 	
 		        <div class="footer">
