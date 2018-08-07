@@ -43,9 +43,10 @@
         </div>
 
         <div class="jumbotron">
-            <h1>Welcome to Qrorcid!</h1>
-            <p class="lead">Qrorcid enables you to create a QR code from details on your ORCID record.</p>
-            <p><a class="btn btn-lg btn-success" href="<c:url value="/qrcode"/>" role="button">Create your QR code</a></p>
+            <div class="lead">
+                <p class="sunset">This application is no longer supported. You can generate now generate QR codes directly in the registry, see:</p>
+                <p class="sunset"><a href="https://support.orcid.org/knowledgebase/articles/116878-orcid-qr-code">https://support.orcid.org/knowledgebase/articles/116878-orcid-qr-code</a></p>
+            </div>
         </div>
 
         <div class="row marketing">
@@ -58,15 +59,10 @@
                     <a href="http://orcid.org/about/what-is-orcid" target="_blank">Find out more.</a>
                 </p>
             </div>
-
-            <div class="col-lg-6">
-                <h4>About Zazzle</h4>
-                <p>Zazzle is an online platform that allow us to create customized ORCID products for you to buy. Create your QR code now to see what you can buy!</p>
-            </div>
         </div>
 
         <div class="footer">
-            <p>&copy; ORCID Inc 2014</p>
+            <p>&copy; ORCID Inc 2018</p>
         </div>
 
     </div> <!-- /container -->
